@@ -2,7 +2,7 @@
   var root = this;
   // embed: dataset, util, browser, mobilephone, crawler, appliance, misc, woothee
 
-// GENERATED at Tue Sep 10 16:15:01 JST 2013 by tagomoris
+// GENERATED at Wed Nov 13 21:55:40 JST 2013 by tagomoris
   var dataset = {};
   (function(){
     var exports = dataset;
@@ -42,7 +42,7 @@
     
     var DATASET = {};
     
-    // GENERATED from dataset.yaml at Tue Sep 10 14:45:26 JST 2013 by tagomoris
+    // GENERATED from dataset.yaml at Wed Nov 13 21:55:16 JST 2013 by tagomoris
     var obj;
     obj = {label:'MSIE', name:'Internet Explorer', type:'browser'};
     obj['vendor'] = 'Microsoft';
