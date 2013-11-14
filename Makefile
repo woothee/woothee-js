@@ -2,7 +2,10 @@ TESTS=test/*.js
 
 all: test
 
-lib/dataset.js: woothee/dataset.yaml
+datasets:
+	git submodule update --init
+
+lib/dataset.js: datasets
 	perl scripts/dataset_yaml2js.pl
 	sync; sync; sync
 
@@ -18,4 +21,4 @@ test: lib/dataset.js build
 
 build: release/woothee.js
 
-.PHONY: test
+.PHONY: datasets test
