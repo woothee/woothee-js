@@ -5,7 +5,7 @@ require('js-yaml');
 var woothee = require('../lib/woothee'),
     dataset = require('../lib/dataset');
 
-var TESTSET_DIR = process.cwd() + '/../woothee/testsets/',
+var TESTSET_DIR = __dirname + '/../woothee/testsets/',
     TARGETS = [
       ['crawler.yaml','Crawler'],['crawler_google.yaml','Crawler/Google'],
       ['pc_windows.yaml','PC/Windows'],['pc_misc.yaml','PC/Misc'],
