@@ -2,7 +2,7 @@
   var root = this;
   // embed: dataset, util, browser, mobilephone, crawler, appliance, misc, woothee
 
-// GENERATED at Thu Nov 14 17:52:23 JST 2013 by tagomoris
+  // GENERATED from dataset.yaml at Mon Nov 18 20:08:21 JST 2013 by tagomoris
   var dataset = {};
   (function(){
     var exports = dataset;
@@ -14,35 +14,28 @@
         KEY_OS = exports.KEY_OS = 'os',
         KEY_VENDOR = exports.KEY_VENDOR = 'vendor',
         KEY_VERSION = exports.KEY_VERSION = 'version';
-    
     var TYPE_BROWSER = 'browser',
         TYPE_OS = 'os',
         TYPE_FULL = 'full';
-    
     var CATEGORY_PC = exports.CATEGORY_PC = 'pc',
         CATEGORY_SMARTPHONE = exports.CATEGORY_SMARTPHONE = 'smartphone',
         CATEGORY_MOBILEPHONE = exports.CATEGORY_MOBILEPHONE = 'mobilephone',
         CATEGORY_CRAWLER = exports.CATEGORY_CRAWLER = 'crawler',
         CATEGORY_APPLIANCE = exports.CATEGORY_APPLIANCE = 'appliance',
         CATEGORY_MISC = exports.CATEGORY_MISC = 'misc';
-    
     var ATTRIBUTE_NAME = exports.ATTRIBUTE_NAME = 'name',
         ATTRIBUTE_CATEGORY = exports.ATTRIBUTE_CATEGORY = 'category',
         ATTRIBUTE_OS = exports.ATTRIBUTE_OS = 'os',
         ATTRIBUTE_VENDOR = exports.ATTRIBUTE_VENDOR = 'vendor',
         ATTRIBUTE_VERSION = exports.ATTRIBUTE_VERSION = 'version';
-    
     var VALUE_UNKNOWN = exports.VALUE_UNKNOWN = 'UNKNOWN';
-    
     var CATEGORY_LIST = exports.CATEGORY_LIST = [
       CATEGORY_PC, CATEGORY_SMARTPHONE, CATEGORY_MOBILEPHONE,
       CATEGORY_CRAWLER, CATEGORY_APPLIANCE, CATEGORY_MISC, VALUE_UNKNOWN
     ];
     var ATTRIBUTE_LIST = exports.ATTRIBUTE_LIST = [ATTRIBUTE_NAME, ATTRIBUTE_CATEGORY, ATTRIBUTE_OS, ATTRIBUTE_VENDOR, ATTRIBUTE_VERSION];
-    
     var DATASET = {};
-    
-    // GENERATED from dataset.yaml at Thu Nov 14 17:52:22 JST 2013 by tagomoris
+    // GENERATED from dataset.yaml at Mon Nov 18 19:33:06 JST 2013 by tagomoris
     var obj;
     obj = {label:'MSIE', name:'Internet Explorer', type:'browser'};
     obj['vendor'] = 'Microsoft';
@@ -342,7 +335,6 @@
     obj['vendor'] = '';
     obj['category'] = 'crawler';
     DATASET[obj.label] = obj;
-    
     var get = exports.get = function(label) {
       return DATASET[label];
     };
@@ -352,7 +344,6 @@
   (function(){
     var exports = util;
     /* CODE: util.js */
-    
     var updateMap = exports.updateMap = function(target, source) {
       for (var key in source) {
         if (key === dataset.KEY_LABEL || key === dataset.KEY_TYPE)
@@ -361,15 +352,12 @@
           target[key] = source[key];
       }
     };
-    
     var updateCategory = exports.updateCategory = function(target, category) {
       target[dataset.ATTRIBUTE_CATEGORY] = category;
     };
-    
     var updateVersion = exports.updateVersion = function(target, version) {
       target[dataset.ATTRIBUTE_VERSION] = version;
     };
-    
     var updateOs = exports.updateOs = function(target, os) {
       target[dataset.ATTRIBUTE_OS] = os;
     };
@@ -379,13 +367,11 @@
   (function(){
     var exports = browser;
     /* CODE: browser.js */
-    
     var msiePattern = /MSIE ([.0-9]+);/;
     var tridentPattern = /Trident\/[.0-9]+; rv ([.0-9]+)/;
     var challengeMSIE = exports.challengeMSIE = function(ua, result) {
       if (ua.indexOf('compatible; MSIE') < 0 && ua.indexOf('Trident/') < 0)
         return false;
-    
       var version;
       var match;
       if ((match = msiePattern.exec(ua)) || (match = tridentPattern.exec(ua)))
@@ -396,15 +382,12 @@
       updateVersion(result, version);
       return true;
     };
-    
     var chromePattern = /(?:Chrome|CrMo|CriOS)\/([.0-9]+)/;
     var safariPattern = /Version\/([.0-9]+)/;
     var challengeSafariChrome = exports.challengeSafariChrome = function(ua, result) {
       if (ua.indexOf('Safari/') < 0)
         return false;
-    
       var version = dataset.VALUE_UNKNOWN;
-    
       var match;
       if ((match = chromePattern.exec(ua))) {
         // Chrome
@@ -413,21 +396,17 @@
         updateVersion(result, version);
         return true;
       }
-    
       if ((match = safariPattern.exec(ua))) {
         version = match[1];
       }
-    
       updateMap(result, dataset.get('Safari'));
       updateVersion(result, version);
       return true;
     };
-    
     var firefoxPattern = /Firefox\/([.0-9]+)/;
     var challengeFirefox = exports.challengeFirefox = function(ua, result) {
       if (ua.indexOf('Firefox/') < 0)
         return false;
-    
       var version = dataset.VALUE_UNKNOWN;
       var match = firefoxPattern.exec(ua);
       if (match)
@@ -436,13 +415,11 @@
       updateVersion(result, version);
       return true;
     };
-    
     var operaPattern1 = /Version\/([.0-9]+)/;
     var operaPattern2 = /Opera[\/ ]([.0-9]+)/;
     var challengeOpera = exports.challengeOpera = function(ua, result) {
       if (ua.indexOf('Opera') < 0)
         return false;
-    
       var version = dataset.VALUE_UNKNOWN;
       var match = operaPattern1.exec(ua);
       if (match) {
@@ -456,19 +433,16 @@
       updateVersion(result, version);
       return true;
     };
-    
     var sleipnirPattern = /Sleipnir\/([.0-9]+)/;
     var challengeSleipnir = exports.challengeSleipnir = function(ua, result) {
       if (ua.indexOf('Sleipnir/') < 0)
         return false;
-    
       var version = dataset.VALUE_UNKNOWN;
       var match = sleipnirPattern.exec(ua);
       if (match)
         version = match[1];
       updateMap(result, dataset.get('Sleipnir'));
       updateVersion(result, version);
-    
       /*
        Sleipnir's user-agent doesn't contain Windows version, so put 'Windows UNKNOWN Ver'.
        Sleipnir is IE component browser, so for Windows only.
@@ -476,7 +450,6 @@
       var win = dataset.get('Win');
       updateCategory(result, win[dataset.KEY_CATEGORY]);
       updateOs(result, win[dataset.KEY_NAME]);
-    
       return true;
     };
 
@@ -485,13 +458,11 @@
   (function(){
     var exports = os;
     /* CODE: os.js */
-    
     var windowsPattern = /Windows ([ .a-zA-Z0-9]+)[;\\)]/;
     var windowsPhonePattern = /^Phone OS/;
     var challengeWindows = exports.challengeWindows = function(ua, result) {
       if (ua.indexOf('Windows') < 0)
         return false;
-    
       var data = dataset.get('Win');
       var match = windowsPattern.exec(ua);
       if (!match) {
@@ -520,11 +491,9 @@
       updateOs(result, data[dataset.KEY_NAME]);
       return true;
     };
-    
     var challengeOSX = exports.challengeOSX = function(ua, result) {
       if (ua.indexOf('Mac OS X') < 0)
         return false;
-    
       var data = dataset.get('OSX');
       if (ua.indexOf('like Mac OS X') >= 0) {
         if (ua.indexOf('iPhone;') >= 0) data = dataset.get('iPhone');
@@ -535,11 +504,9 @@
       updateOs(result, data[dataset.KEY_NAME]);
       return true;
     };
-    
     var challengeLinux = exports.challengeLinux = function(ua, result) {
       if (ua.indexOf('Linux') < 0)
         return false;
-    
       var data = dataset.get('Linux');
       if (ua.indexOf('Android') >= 0)
         data = dataset.get('Android');
@@ -547,7 +514,6 @@
       updateOs(result, data[dataset.KEY_NAME]);
       return true;
     };
-    
     var challengeSmartPhone = exports.challengeSmartPhone = function(ua, result) {
       var data = null;
       if (ua.indexOf('iPhone') >= 0) data = dataset.get('iPhone');
@@ -556,7 +522,6 @@
       else if (ua.indexOf('Android') >= 0) data = dataset.get('Android');
       else if (ua.indexOf('CFNetwork') >= 0) data = dataset.get('iOS');
       else if (ua.indexOf('BlackBerry') >= 0) data = dataset.get('BlackBerry');
-    
       if (result[dataset.KEY_NAME] && result[dataset.KEY_NAME] === dataset.get('Firefox')[dataset.KEY_NAME]) {
         // Firefox OS specific pattern
         // http://lawrencemandel.com/2012/07/27/decision-made-firefox-os-user-agent-string/
@@ -564,15 +529,12 @@
           data = dataset.get('FirefoxOS');
         }
       }
-    
       if (!data)
         return false;
-    
       updateCategory(result, data[dataset.KEY_CATEGORY]);
       updateOs(result, data[dataset.KEY_NAME]);
       return true;
     };
-    
     var challengeMobilePhone = exports.challengeMobilePhone = function(ua, result) {
       var data,match;
       if (ua.indexOf('KDDI-') >= 0) {
@@ -611,10 +573,8 @@
         updateVersion(result, 'Naver');
         return true;
       }
-    
       return false;
     };
-    
     var challengeAppliance = exports.challengeAppliance = function(ua, result) {
       var data;
       if (ua.indexOf('Nintendo DSi;') >= 0) {
@@ -631,20 +591,17 @@
       }
       return false;
     };
-    
     var challengeMisc = exports.challengeMisc = function(ua, result) {
       var data;
       if (ua.indexOf('(Win98;') >= 0) data = dataset.get('Win98');
       else if (ua.indexOf('Macintosh; U; PPC;') >= 0) data = dataset.get('MacOS');
       else if (ua.indexOf('Mac_PowerPC') >= 0) data = dataset.get('MacOS');
       else if (ua.indexOf('X11; FreeBSD ') >= 0) data = dataset.get('BSD');
-    
       if (data) {
         updateCategory(result, data[dataset.KEY_CATEGORY]);
         updateOs(result, data[dataset.KEY_NAME]);
         return true;
       }
-    
       return false;
     };
 
@@ -653,13 +610,11 @@
   (function(){
     var exports = mobilephone;
     /* CODE: mobilephone.js */
-    
     var docomoPattern = /DoCoMo\/[.0-9]+[ \/]([^- \/;()"']+)/;
     var fomaPattern = /\(([^;)]+);FOMA;/;
     var challengeDocomo = exports.challengeDocomo = function(ua, result) {
       if (ua.indexOf('DoCoMo') < 0 && ua.indexOf(';FOMA;') < 0)
         return false;
-    
       var version = dataset.VALUE_UNKNOWN;
       var match;
       if ((match = docomoPattern.exec(ua))) {
@@ -671,12 +626,10 @@
       updateVersion(result, version);
       return true;
     };
-    
     var kddiPattern = /KDDI-([^- \/;()"']+)/;
     var challengeAu = exports.challengeAu = function(ua, result) {
       if (ua.indexOf('KDDI-') < 0)
         return false;
-    
       var version = dataset.VALUE_UNKNOWN;
       var match = kddiPattern.exec(ua);
       if (match)
@@ -685,12 +638,10 @@
       updateVersion(result, version);
       return true;
     };
-    
     var softbankPattern = /(?:SoftBank|Vodafone|J-PHONE)\/[.0-9]+\/([^ \/;()]+)/;
     var challengeSoftbank = exports.challengeSoftbank = function(ua, result) {
       if (ua.indexOf('SoftBank') < 0 && ua.indexOf('Vodafone') < 0 && ua.indexOf('J-PHONE') < 0)
         return false;
-    
       var version = dataset.VALUE_UNKNOWN;
       var match = softbankPattern.exec(ua);
       if (match)
@@ -699,12 +650,10 @@
       updateVersion(result, version);
       return true;
     };
-    
     var willcomPattern = /(?:WILLCOM|DDIPOCKET);[^\/]+\/([^ \/;()]+)/;
     var challengeWillcom = exports.challengeWillcom = function(ua, result) {
       if (ua.indexOf('WILLCOM') < 0 && ua.indexOf('DDIPOCKET') < 0)
         return false;
-    
       var version = dataset.VALUE_UNKNOWN;
       var match = willcomPattern.exec(ua);
       if (match)
@@ -713,7 +662,6 @@
       updateVersion(result, version);
       return true;
     };
-    
     var challengeMisc = exports.challengeMisc = function(ua, result) {
       var match;
       if (ua.indexOf('jig browser') >= 0) {
@@ -749,11 +697,9 @@
   (function(){
     var exports = crawler;
     /* CODE: crawler.js */
-    
     var challengeGoogle = exports.challengeGoogle = function(ua, result) {
       if (ua.indexOf('Google') < 0)
         return false;
-    
       if (ua.indexOf('compatible; Googlebot') >= 0) {
         if (ua.indexOf('compatible; Googlebot-Mobile') >= 0) {
           updateMap(result, dataset.get('GoogleBotMobile'));
@@ -785,10 +731,8 @@
         updateMap(result, dataset.get('GoogleWebPreview'));
         return true;
       }
-    
       return false;
     };
-    
     var challengeCrawlers = exports.challengeCrawlers = function(ua, result) {
       if (ua.indexOf('Yahoo') >= 0
           || ua.indexOf('help.yahoo.co.jp/help/jp/') >= 0
@@ -902,10 +846,8 @@
           return true;
         }
       }
-    
       return false;
     };
-    
     var challengeMaybeCrawler = exports.challengeMaybeCrawler = function(ua, result) {
       if (/(bot|crawler|spider)(?:[-_ .\/;@()]|$)/i.exec(ua)) {
         updateMap(result, dataset.get('VariousCrawler'));
@@ -932,63 +874,51 @@
   (function(){
     var exports = appliance;
     /* CODE: appliance.js */
-    
     var challengePlaystation = exports.challengePlaystation = function(ua, result) {
       var data = null;
       if (ua.indexOf('PSP (PlayStation Portable);') >= 0) data = dataset.get('PSP');
       else if (ua.indexOf('PlayStation Vita') >= 0) data = dataset.get('PSVita');
       else if (ua.indexOf('PLAYSTATION 3 ') >= 0 || ua.indexOf('PLAYSTATION 3;') >= 0) data = dataset.get('PS3');
-    
       if (! data)
         return false;
-    
       updateMap(result, data);
       return true;
     };
-    
     var challengeNintendo = exports.challengeNintendo = function(ua, result) {
       var data = null;
       if (ua.indexOf('Nintendo 3DS;') >= 0) data = dataset.get('Nintendo3DS');
       else if (ua.indexOf('Nintendo DSi;') >= 0) data = dataset.get('NintendoDSi');
       else if (ua.indexOf('Nintendo Wii;') >= 0) data = dataset.get('NintendoWii');
       else if (ua.indexOf('(Nintendo WiiU)') >= 0) data = dataset.get('NintendoWiiU');
-    
       if (! data)
         return false;
-    
       updateMap(result, data);
       return true;
     };
-    
     var challengeDigitalTV = exports.challengeDigitalTV = function(ua, result) {
       var data = null;
       if (ua.indexOf('InettvBrowser/') >= 0) data = dataset.get('DigitalTV');
-    
       if (! data)
         return false;
-    
       updateMap(result, data);
       return true;
     };
+
   })();
   var misc = {};
   (function(){
     var exports = misc;
     /* CODE: misc.js */
-    
     var challengeDesktopTools = exports.challengeDesktopTools = function(ua, result){
       var data = null;
       if (ua.indexOf('AppleSyndication/') >= 0) data = dataset.get('SafariRSSReader');
       else if (ua.indexOf('compatible; Google Desktop/') >= 0) data = dataset.get('GoogleDesktop');
       else if (ua.indexOf('Windows-RSS-Platform') >= 0) data = dataset.get('WindowsRSSReader');
-    
       if (!data)
         return false;
-    
       updateMap(result, data);
       return true;
     };
-    
     var challengeSmartPhonePatterns = exports.challengeSmartPhonePatterns = function(ua, result){
       var data;
       if (ua.indexOf('CFNetwork/') >= 0) {
@@ -997,10 +927,8 @@
         updateOs(result, data[dataset.KEY_NAME]);
         return true;
       }
-    
       return false;
     };
-    
     var challengeHTTPLibrary = exports.challengeHTTPLibrary = function(ua, result){
       var data,version;
       if (/^(?:Apache-HttpClient\/|Jakarta Commons-HttpClient\/|Java\/)/.exec(ua) || /[- ]HttpClient(\/|$)/.exec(ua)) {
@@ -1020,15 +948,12 @@
       } else if (ua.indexOf('PEAR HTTP_Request class;') >= 0) {
         data = dataset.get('HTTPLibrary'); version = 'php';
       }
-    
       if (! data)
         return false;
-    
       updateMap(result, data);
       updateVersion(result, version);
       return true;
     };
-    
     var challengeMaybeRSSReader = exports.challengeMaybeRSSReader = function(ua, result){
       var data = null;
       if (/rss(?:reader|bar|[-_ \/;()]|[ +]*\/)/i.exec(ua) || /headline-reader/i.exec(ua)) {
@@ -1038,10 +963,8 @@
         if (ua.indexOf('cococ/') >= 0)
           data = dataset.get('VariousRSSReader');
       }
-    
       if (! data)
         return false;
-    
       updateMap(result, data);
       return true;
     };
@@ -1051,171 +974,123 @@
   (function(){
     var exports = woothee;
     /* CODE: woothee.js */
-    
     var parse = exports.parse = function(userAgent) {
       return fillResult(execParse(userAgent));
     };
-    
     var isCrawler = exports.isCrawler = function(userAgent) {
       return false;
     };
-    
     function execParse(userAgent) {
       var result = {};
-    
       if (userAgent.length < 1 || userAgent === '-')
         return result;
-    
       if (tryCrawler(userAgent, result))
         return result;
-    
       if (tryBrowser(userAgent, result)) {
         if (tryOS(userAgent, result))
           return result;
         else
           return result;
       }
-    
       if (tryMobilePhone(userAgent, result))
         return result;
-    
       if (tryAppliance(userAgent, result))
         return result;
-    
       if (tryMisc(userAgent, result))
         return result;
-    
       // browser unknown, check os only
       if (tryOS(userAgent, result))
         return result;
-    
       if (tryRareCases(userAgent, result))
         return result;
-    
       return result;
     };
-    
     function tryCrawler(userAgent, result) {
       if (crawler.challengeGoogle(userAgent, result))
         return true;
-    
       if (crawler.challengeCrawlers(userAgent, result))
         return true;
-    
       return false;
     }
-    
     function tryBrowser(userAgent, result) {
       if (browser.challengeMSIE(userAgent, result))
         return true;
-    
       if (browser.challengeSafariChrome(userAgent, result))
         return true;
-    
       if (browser.challengeFirefox(userAgent, result))
         return true;
-    
       if (browser.challengeOpera(userAgent, result))
         return true;
-    
       return false;
     }
-    
     function tryOS(userAgent, result) {
       if (os.challengeWindows(userAgent, result))
         return true;
-    
       // OSX PC and iOS devices (strict check)
       if (os.challengeOSX(userAgent, result))
         return true;
-    
       // Linux PC and Android
       if (os.challengeLinux(userAgent, result))
         return true;
-    
       // all useragents matches /(iPhone|iPad|iPod|Android|BlackBerry)/
       if (os.challengeSmartPhone(userAgent, result))
         return true;
-    
       // mobile phones like KDDI-.*
       if (os.challengeMobilePhone(userAgent, result))
         return true;
-    
       // Nintendo DSi/Wii with Opera
       if (os.challengeAppliance(userAgent, result))
         return true;
-    
       if (os.challengeMisc(userAgent, result))
         return true;
-    
       return false;
     }
-    
     function tryMobilePhone(userAgent, result) {
       if (mobilephone.challengeDocomo(userAgent, result))
         return true;
-    
       if (mobilephone.challengeAu(userAgent, result))
         return true;
-    
       if (mobilephone.challengeSoftbank(userAgent, result))
         return true;
-    
       if (mobilephone.challengeWillcom(userAgent, result))
         return true;
-    
       if (mobilephone.challengeMisc(userAgent, result))
         return true;
-    
       return false;
     }
-    
     function tryAppliance(userAgent, result) {
       if (appliance.challengePlaystation(userAgent, result))
         return true;
-    
       if (appliance.challengeNintendo(userAgent, result))
         return true;
-    
       if (appliance.challengeDigitalTV(userAgent, result))
         return true;
-    
       return false;
     }
-    
     function tryMisc(userAgent, result) {
       if (misc.challengeDesktopTools(userAgent, result))
         return true;
-    
       return false;
     }
-    
     function tryRareCases(userAgent, result) {
       if (misc.challengeSmartPhonePatterns(userAgent, result))
         return true;
-    
       if (browser.challengeSleipnir(userAgent, result))
         return true;
-    
       if (misc.challengeHTTPLibrary(userAgent, result))
         return true;
-    
       if (misc.challengeMaybeRSSReader(userAgent, result))
         return true;
-    
       if (crawler.challengeMaybeCrawler(userAgent, result))
         return true;
-    
       return false;
     }
-    
     var filled = {};
     filled[dataset.ATTRIBUTE_NAME] = dataset.VALUE_UNKNOWN;
     filled[dataset.ATTRIBUTE_CATEGORY] = dataset.VALUE_UNKNOWN;
     filled[dataset.ATTRIBUTE_OS] = dataset.VALUE_UNKNOWN;
     filled[dataset.ATTRIBUTE_VERSION] = dataset.VALUE_UNKNOWN;
     filled[dataset.ATTRIBUTE_VENDOR] = dataset.VALUE_UNKNOWN;
-    
     function fillResult(result) {
       if (! result[dataset.ATTRIBUTE_NAME])
         result[dataset.ATTRIBUTE_NAME] = dataset.VALUE_UNKNOWN;
@@ -1229,8 +1104,8 @@
         result[dataset.ATTRIBUTE_VENDOR] = dataset.VALUE_UNKNOWN;
       return result;
     };
-  })();
 
+  })();
   var updateMap = util.updateMap,
       updateCategory = util.updateCategory,
       updateOs = util.updateOs,
