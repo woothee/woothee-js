@@ -2,7 +2,7 @@
   var root = this;
   // embed: dataset, util, browser, mobilephone, crawler, appliance, misc, woothee
 
-  // GENERATED from dataset.yaml at Mon Nov 18 20:08:21 JST 2013 by tagomoris
+  // GENERATED from dataset.yaml at Tue Dec  3 19:48:46 JST 2013 by tagomoris
   var dataset = {};
   (function(){
     var exports = dataset;
@@ -35,7 +35,7 @@
     ];
     var ATTRIBUTE_LIST = exports.ATTRIBUTE_LIST = [ATTRIBUTE_NAME, ATTRIBUTE_CATEGORY, ATTRIBUTE_OS, ATTRIBUTE_VENDOR, ATTRIBUTE_VERSION];
     var DATASET = {};
-    // GENERATED from dataset.yaml at Mon Nov 18 19:33:06 JST 2013 by tagomoris
+    // GENERATED from dataset.yaml at Tue Dec  3 19:48:46 JST 2013 by tagomoris
     var obj;
     obj = {label:'MSIE', name:'Internet Explorer', type:'browser'};
     obj['vendor'] = 'Microsoft';
@@ -201,6 +201,21 @@
     obj['vendor'] = 'Sony';
     obj['category'] = 'appliance';
     obj['os'] = 'PlayStation 3';
+    DATASET[obj.label] = obj;
+    obj = {label:'PS4', name:'PlayStation 4', type:'full'};
+    obj['vendor'] = 'Sony';
+    obj['category'] = 'appliance';
+    obj['os'] = 'PlayStation 4';
+    DATASET[obj.label] = obj;
+    obj = {label:'Xbox360', name:'Xbox 360', type:'full'};
+    obj['vendor'] = 'Microsoft';
+    obj['category'] = 'appliance';
+    obj['os'] = 'Xbox 360';
+    DATASET[obj.label] = obj;
+    obj = {label:'XboxOne', name:'Xbox One', type:'full'};
+    obj['vendor'] = 'Microsoft';
+    obj['category'] = 'appliance';
+    obj['os'] = 'Xbox One';
     DATASET[obj.label] = obj;
     obj = {label:'DigitalTV', name:'InternetTVBrowser', type:'full'};
     obj['vendor'] = '';
@@ -463,6 +478,17 @@
     var challengeWindows = exports.challengeWindows = function(ua, result) {
       if (ua.indexOf('Windows') < 0)
         return false;
+      // Xbox Series
+      if (ua.indexOf('Xbox') > -1) {
+        var d;
+        if (ua.indexOf('Xbox; Xbox One)') > -1) 
+          d = dataset.get("XboxOne");
+        else
+          d = dataset.get("Xbox360");
+        // overwrite browser detections as appliance
+        updateMap(result, d);
+        return true;
+      }
       var data = dataset.get('Win');
       var match = windowsPattern.exec(ua);
       if (!match) {
@@ -879,6 +905,7 @@
       if (ua.indexOf('PSP (PlayStation Portable);') >= 0) data = dataset.get('PSP');
       else if (ua.indexOf('PlayStation Vita') >= 0) data = dataset.get('PSVita');
       else if (ua.indexOf('PLAYSTATION 3 ') >= 0 || ua.indexOf('PLAYSTATION 3;') >= 0) data = dataset.get('PS3');
+      else if (ua.indexOf('PlayStation 4 ') >= 0) data = dataset.get('PS4');
       if (! data)
         return false;
       updateMap(result, data);
