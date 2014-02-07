@@ -2,7 +2,7 @@
   var root = this;
   // embed: dataset, util, browser, mobilephone, crawler, appliance, misc, woothee
 
-  // GENERATED from dataset.yaml at Tue Dec  3 19:48:46 JST 2013 by tagomoris
+  // GENERATED from dataset.yaml at Fri Feb  7 20:14:03 JST 2014 by tagomoris
   var dataset = {};
   (function(){
     var exports = dataset;
@@ -35,7 +35,7 @@
     ];
     var ATTRIBUTE_LIST = exports.ATTRIBUTE_LIST = [ATTRIBUTE_NAME, ATTRIBUTE_CATEGORY, ATTRIBUTE_OS, ATTRIBUTE_VENDOR, ATTRIBUTE_VERSION];
     var DATASET = {};
-    // GENERATED from dataset.yaml at Tue Dec  3 19:48:46 JST 2013 by tagomoris
+    // GENERATED from dataset.yaml at Fri Feb  7 20:14:03 JST 2014 by tagomoris
     var obj;
     obj = {label:'MSIE', name:'Internet Explorer', type:'browser'};
     obj['vendor'] = 'Microsoft';
@@ -383,7 +383,7 @@
     var exports = browser;
     /* CODE: browser.js */
     var msiePattern = /MSIE ([.0-9]+);/;
-    var tridentPattern = /Trident\/[.0-9]+; rv ([.0-9]+)/;
+    var tridentPattern = /Trident\/[.0-9]+; rv:([.0-9]+)/;
     var challengeMSIE = exports.challengeMSIE = function(ua, result) {
       if (ua.indexOf('compatible; MSIE') < 0 && ua.indexOf('Trident/') < 0)
         return false;
