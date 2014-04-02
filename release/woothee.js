@@ -2,7 +2,7 @@
   var root = this;
   // embed: dataset, util, browser, mobilephone, crawler, appliance, misc, woothee
 
-  // GENERATED from dataset.yaml at Fri Feb  7 20:14:03 JST 2014 by tagomoris
+  // GENERATED from dataset.yaml at Wed Apr  2 13:23:00 JST 2014 by tagomoris
   var dataset = {};
   (function(){
     var exports = dataset;
@@ -35,7 +35,7 @@
     ];
     var ATTRIBUTE_LIST = exports.ATTRIBUTE_LIST = [ATTRIBUTE_NAME, ATTRIBUTE_CATEGORY, ATTRIBUTE_OS, ATTRIBUTE_VENDOR, ATTRIBUTE_VERSION];
     var DATASET = {};
-    // GENERATED from dataset.yaml at Fri Feb  7 20:14:03 JST 2014 by tagomoris
+    // GENERATED from dataset.yaml at Wed Apr  2 13:23:00 JST 2014 by tagomoris
     var obj;
     obj = {label:'MSIE', name:'Internet Explorer', type:'browser'};
     obj['vendor'] = 'Microsoft';
@@ -398,6 +398,7 @@
       return true;
     };
     var chromePattern = /(?:Chrome|CrMo|CriOS)\/([.0-9]+)/;
+    var operaBlinkPattern = /OPR\/([.0-9]+)/;
     var safariPattern = /Version\/([.0-9]+)/;
     var challengeSafariChrome = exports.challengeSafariChrome = function(ua, result) {
       if (ua.indexOf('Safari/') < 0)
@@ -405,6 +406,14 @@
       var version = dataset.VALUE_UNKNOWN;
       var match;
       if ((match = chromePattern.exec(ua))) {
+        var matchOpera;
+        if ((matchOpera = operaBlinkPattern.exec(ua))) {
+          // Opera w/ blink
+          version = matchOpera[1];
+          updateMap(result, dataset.get('Opera'));
+          updateVersion(result, version);
+          return true;
+        }
         // Chrome
         version = match[1];
         updateMap(result, dataset.get('Chrome'));
