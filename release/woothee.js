@@ -2,10 +2,10 @@
   var root = this;
   // embed: dataset, util, browser, mobilephone, crawler, appliance, misc, woothee
 
-  // GENERATED from dataset.yaml at Sun Apr  6 15:39:34 JST 2014 by tagomoris
+  // GENERATED from dataset.yaml at Sun Apr  6 15:41:23 JST 2014 by tagomoris
 
   // Snapshot from package.json
-  var package_info = {"name":"woothee","version":"0.3.9","description":"User-Agent string parser (js implementation)","main":"./release/woothee","devDependencies":{"mocha":">= 1.7.0","chai":">= 1.3.0","js-yaml":">= 1.0.3","should":"~1.2.2"},"scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/woothee/woothee-js"},"author":"tagomoris","license":"Apache v2"};
+  var package_info = {"name":"woothee","version":"0.4.0","description":"User-Agent string parser (js implementation)","main":"./release/woothee","devDependencies":{"mocha":">= 1.7.0","chai":">= 1.3.0","js-yaml":">= 1.0.3","should":"~1.2.2"},"scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/woothee/woothee-js"},"author":"tagomoris","license":"Apache v2"};
 
   var dataset = {};
   (function(){
@@ -39,7 +39,7 @@
     ];
     var ATTRIBUTE_LIST = exports.ATTRIBUTE_LIST = [ATTRIBUTE_NAME, ATTRIBUTE_CATEGORY, ATTRIBUTE_OS, ATTRIBUTE_VENDOR, ATTRIBUTE_VERSION];
     var DATASET = {};
-    // GENERATED from dataset.yaml at Sun Apr  6 15:39:34 JST 2014 by tagomoris
+    // GENERATED from dataset.yaml at Sun Apr  6 15:41:22 JST 2014 by tagomoris
     var obj;
     obj = {label:'MSIE', name:'Internet Explorer', type:'browser'};
     obj['vendor'] = 'Microsoft';
