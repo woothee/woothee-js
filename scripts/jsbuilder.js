@@ -35,6 +35,13 @@ fs.readFile(__dirname + '/release_footer.js', function(err, data){
 var dumpToFile = function() {
   var defs = [util.format("  // GENERATED from dataset.yaml at %s by %s", generated_timestamp, generated_username)];
 
+  /* Inject package.json into release/woothee.js */
+  var package_info = require('../package.json');
+  defs.push('');
+  defs.push('  // Snapshot from package.json');
+  defs.push(util.format("  var package_info = %s;", JSON.stringify(package_info)));
+  defs.push('');
+
   imports.forEach(function(modname){
     var content = fs.readFileSync(__dirname + '/../lib/' + modname + '.js').toString();
     var header_flag = false;

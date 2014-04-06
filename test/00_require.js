@@ -1,5 +1,6 @@
 var fs = require('fs');
 var files = fs.readdirSync('lib');
+var expect = require('chai').expect;
 
 describe('woothee', function(){
   it('should be required successfully', function(){
@@ -9,5 +10,10 @@ describe('woothee', function(){
         return;
       var x = require('../lib/' + modname);
     });
+  });
+
+  it('should have valid version', function(){
+    var woothee = require('./../lib/woothee');
+    expect(woothee.VERSION).to.match(/^[0-9]+\.[0-9]+\.[0-9]+$/);
   });
 });
