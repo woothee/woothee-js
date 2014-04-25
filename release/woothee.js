@@ -2,10 +2,10 @@
   var root = this;
   // embed: dataset, util, browser, mobilephone, crawler, appliance, misc, woothee
 
-  // GENERATED from dataset.yaml at Sun Apr  6 15:41:23 JST 2014 by tagomoris
+  // GENERATED from dataset.yaml at Fri Apr 25 13:06:56 JST 2014 by tagomoris
 
   // Snapshot from package.json
-  var package_info = {"name":"woothee","version":"0.4.0","description":"User-Agent string parser (js implementation)","main":"./release/woothee","devDependencies":{"mocha":">= 1.7.0","chai":">= 1.3.0","js-yaml":">= 1.0.3","should":"~1.2.2"},"scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/woothee/woothee-js"},"author":"tagomoris","license":"Apache v2"};
+  var package_info = {"name":"woothee","version":"0.4.1","description":"User-Agent string parser (js implementation)","main":"./release/woothee","devDependencies":{"mocha":">= 1.7.0","chai":">= 1.3.0","js-yaml":">= 1.0.3","should":"~1.2.2"},"scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/woothee/woothee-js"},"author":"tagomoris","license":"Apache v2"};
 
   var dataset = {};
   (function(){
@@ -39,7 +39,7 @@
     ];
     var ATTRIBUTE_LIST = exports.ATTRIBUTE_LIST = [ATTRIBUTE_NAME, ATTRIBUTE_CATEGORY, ATTRIBUTE_OS, ATTRIBUTE_VENDOR, ATTRIBUTE_VERSION];
     var DATASET = {};
-    // GENERATED from dataset.yaml at Sun Apr  6 15:41:22 JST 2014 by tagomoris
+    // GENERATED from dataset.yaml at Fri Apr 25 13:06:56 JST 2014 by tagomoris
     var obj;
     obj = {label:'MSIE', name:'Internet Explorer', type:'browser'};
     obj['vendor'] = 'Microsoft';
@@ -108,6 +108,9 @@
     obj['category'] = 'pc';
     DATASET[obj.label] = obj;
     obj = {label:'BSD', name:'BSD', type:'os'};
+    obj['category'] = 'pc';
+    DATASET[obj.label] = obj;
+    obj = {label:'ChromeOS', name:'ChromeOS', type:'os'};
     obj['category'] = 'pc';
     DATASET[obj.label] = obj;
     obj = {label:'Android', name:'Android', type:'os'};
@@ -537,7 +540,7 @@
       if (ua.indexOf('like Mac OS X') >= 0) {
         if (ua.indexOf('iPhone;') >= 0) data = dataset.get('iPhone');
         else if (ua.indexOf('iPad;') >= 0) data = dataset.get('iPad');
-        else if (ua.indexOf('iPod;') >= 0) data = dataset.get('iPod');
+        else if (ua.indexOf('iPod') >= 0) data = dataset.get('iPod');
       }
       updateCategory(result, data[dataset.KEY_CATEGORY]);
       updateOs(result, data[dataset.KEY_NAME]);
@@ -564,7 +567,8 @@
       if (result[dataset.KEY_NAME] && result[dataset.KEY_NAME] === dataset.get('Firefox')[dataset.KEY_NAME]) {
         // Firefox OS specific pattern
         // http://lawrencemandel.com/2012/07/27/decision-made-firefox-os-user-agent-string/
-        if (/^Mozilla\/[.0-9]+ \(Mobile;(.*;)? rv:[.0-9]+\) Gecko\/[.0-9]+ Firefox\/[.0-9]+$/.exec(ua)) {
+        // https://github.com/woothee/woothee/issues/2
+        if (/^Mozilla\/[.0-9]+ \((Mobile|Tablet);(.*;)? rv:[.0-9]+\) Gecko\/[.0-9]+ Firefox\/[.0-9]+$/.exec(ua)) {
           data = dataset.get('FirefoxOS');
         }
       }
@@ -636,6 +640,7 @@
       else if (ua.indexOf('Macintosh; U; PPC;') >= 0) data = dataset.get('MacOS');
       else if (ua.indexOf('Mac_PowerPC') >= 0) data = dataset.get('MacOS');
       else if (ua.indexOf('X11; FreeBSD ') >= 0) data = dataset.get('BSD');
+      else if (ua.indexOf('X11; CrOS ') >= 0) data = dataset.get('ChromeOS');
       if (data) {
         updateCategory(result, data[dataset.KEY_CATEGORY]);
         updateOs(result, data[dataset.KEY_NAME]);
