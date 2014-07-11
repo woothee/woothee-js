@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 
-require('js-yaml');
+var fs = require('fs')
+  , yaml = require('js-yaml');
 
 var woothee = require('../lib/woothee'),
     dataset = require('../lib/dataset');
@@ -24,7 +25,7 @@ describe('woothee', function(){
   TARGETS.forEach(function(pair){
     var filename = pair[0],
         groupname = pair[1];
-    var testset = require(TESTSET_DIR + filename);
+    var testset = yaml.safeLoad(fs.readFileSync(TESTSET_DIR + filename, 'utf8'));
 
     testset.forEach(function(entry){
 

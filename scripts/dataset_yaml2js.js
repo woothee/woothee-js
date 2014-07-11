@@ -1,8 +1,8 @@
-require('js-yaml'); // this extends 'require'
 var fs = require('fs')
-  , util = require('util');
+  , util = require('util')
+  , yaml = require('js-yaml');
 
-var dataset_entries = require(__dirname + '/../woothee/dataset.yaml')
+var dataset_entries = yaml.safeLoad(fs.readFileSync(__dirname + '/../woothee/dataset.yaml', 'utf8'))
   , js_file = __dirname + '/../lib/dataset.js';
 
 var generated_timestamp;
