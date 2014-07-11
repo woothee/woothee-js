@@ -2,10 +2,10 @@
   var root = this;
   // embed: dataset, util, browser, mobilephone, crawler, appliance, misc, woothee
 
-  // GENERATED from dataset.yaml at Fri Apr 25 13:06:56 JST 2014 by tagomoris
+  // GENERATED from dataset.yaml at Fri Jul 11 16:23:47 JST 2014 by tagomoris
 
   // Snapshot from package.json
-  var package_info = {"name":"woothee","version":"0.4.1","description":"User-Agent string parser (js implementation)","main":"./release/woothee","devDependencies":{"mocha":">= 1.7.0","chai":">= 1.3.0","js-yaml":">= 1.0.3","should":"~1.2.2"},"scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/woothee/woothee-js"},"author":"tagomoris","license":"Apache v2"};
+  var package_info = {"name":"woothee","version":"0.4.2","description":"User-Agent string parser (js implementation)","main":"./release/woothee","devDependencies":{"mocha":">= 1.7.0","chai":">= 1.3.0","js-yaml":">= 1.0.3","should":"~1.2.2"},"scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/woothee/woothee-js"},"author":"tagomoris","license":"Apache v2"};
 
   var dataset = {};
   (function(){
@@ -39,7 +39,7 @@
     ];
     var ATTRIBUTE_LIST = exports.ATTRIBUTE_LIST = [ATTRIBUTE_NAME, ATTRIBUTE_CATEGORY, ATTRIBUTE_OS, ATTRIBUTE_VENDOR, ATTRIBUTE_VERSION];
     var DATASET = {};
-    // GENERATED from dataset.yaml at Fri Apr 25 13:06:56 JST 2014 by tagomoris
+    // GENERATED from dataset.yaml at Fri Jul 11 16:23:47 JST 2014 by tagomoris
     var obj;
     obj = {label:'MSIE', name:'Internet Explorer', type:'browser'};
     obj['vendor'] = 'Microsoft';
@@ -390,7 +390,7 @@
     var exports = browser;
     /* CODE: browser.js */
     var msiePattern = /MSIE ([.0-9]+);/;
-    var tridentPattern = /Trident\/[.0-9]+; rv:([.0-9]+)/;
+    var tridentPattern = /Trident\/[.0-9]+;(?: BOIE[0-9]+;[A-Z]+;)? rv:([.0-9]+)/;
     var challengeMSIE = exports.challengeMSIE = function(ua, result) {
       if (ua.indexOf('compatible; MSIE') < 0 && ua.indexOf('Trident/') < 0)
         return false;
@@ -791,6 +791,11 @@
         }
         if (ua.indexOf('crawler (http://listing.yahoo.co.jp/support/faq/') >= 0
             || ua.indexOf('crawler (http://help.yahoo.co.jp/help/jp/') >= 0) {
+          updateMap(result, dataset.get('YahooJP'));
+          return true;
+        }
+        if (ua.indexOf('Y!J-BRZ/YATSHA crawler') >= 0
+            || ua.indexOf('Y!J-BRY/YATSH crawler') >= 0) {
           updateMap(result, dataset.get('YahooJP'));
           return true;
         }
