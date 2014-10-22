@@ -11,7 +11,7 @@ describe('woothee dataset', function(){
   it('contains list of attributes', function(){
     expect(dataset.ATTRIBUTE_LIST).to.eql([
       dataset.ATTRIBUTE_NAME, dataset.ATTRIBUTE_CATEGORY, dataset.ATTRIBUTE_OS,
-      dataset.ATTRIBUTE_VENDOR, dataset.ATTRIBUTE_VERSION
+      dataset.ATTRIBUTE_VENDOR, dataset.ATTRIBUTE_VERSION, dataset.ATTRIBUTE_OS_VERSION
     ]);
   });
 

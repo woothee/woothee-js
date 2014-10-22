@@ -39,6 +39,7 @@ describe('woothee', function(){
           case dataset.ATTRIBUTE_CATEGORY:
             break;
           case dataset.ATTRIBUTE_OS:
+          case dataset.ATTRIBUTE_OS_VERSION:
           case dataset.ATTRIBUTE_VERSION:
           case dataset.ATTRIBUTE_VENDOR:
             if (! entry[attr]) return;
