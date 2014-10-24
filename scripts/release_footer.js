@@ -2,6 +2,7 @@
   var updateMap = util.updateMap,
       updateCategory = util.updateCategory,
       updateOs = util.updateOs,
+      updateOsVersion = util.updateOsVersion,
       updateVersion = util.updateVersion;
 
   // AMD / RequireJS
