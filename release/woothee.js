@@ -2,10 +2,10 @@
   var root = this;
   // embed: dataset, util, browser, mobilephone, crawler, appliance, misc, woothee
 
-  // GENERATED from dataset.yaml at Fri Oct 24 17:03:07 JST 2014 by tagomoris
+  // GENERATED from dataset.yaml at Wed Jan 14 18:17:51 JST 2015 by tagomoris
 
   // Snapshot from package.json
-  var package_info = {"name":"woothee","version":"1.0.1","description":"User-Agent string parser (js implementation)","main":"./release/woothee","devDependencies":{"mocha":">= 1.7.0","chai":">= 1.3.0","js-yaml":">= 1.0.3","should":"~1.2.2"},"scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/woothee/woothee-js"},"author":"tagomoris","license":"Apache v2"};
+  var package_info = {"name":"woothee","version":"1.0.2","description":"User-Agent string parser (js implementation)","main":"./release/woothee","devDependencies":{"mocha":">= 1.7.0","chai":">= 1.3.0","js-yaml":">= 1.0.3","should":"~1.2.2"},"scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/woothee/woothee-js"},"author":"tagomoris","license":"Apache v2"};
 
   var dataset = {};
   (function(){
@@ -41,7 +41,7 @@
     ];
     var ATTRIBUTE_LIST = exports.ATTRIBUTE_LIST = [ATTRIBUTE_NAME, ATTRIBUTE_CATEGORY, ATTRIBUTE_OS, ATTRIBUTE_VENDOR, ATTRIBUTE_VERSION, ATTRIBUTE_OS_VERSION];
     var DATASET = {};
-    // GENERATED from dataset.yaml at Fri Oct 24 17:03:06 JST 2014 by tagomoris
+    // GENERATED from dataset.yaml at Wed Jan 14 18:17:50 JST 2015 by tagomoris
     var obj;
     obj = {label:'MSIE', name:'Internet Explorer', type:'browser'};
     obj['vendor'] = 'Microsoft';
@@ -395,14 +395,20 @@
     var exports = browser;
     /* CODE: browser.js */
     var msiePattern = /MSIE ([.0-9]+);/;
-    var tridentPattern = /Trident\/[.0-9]+;(?: BOIE[0-9]+;[A-Z]+;)? rv:([.0-9]+)/;
+    var tridentPattern = /Trident\/[.0-9]+;/;
+    var tridentVersionPattern = / rv:([.0-9]+)/;
     var iemobilePattern = /IEMobile\/([.0-9]+);/;
     var challengeMSIE = exports.challengeMSIE = function(ua, result) {
       if (ua.indexOf('compatible; MSIE') < 0 && ua.indexOf('Trident/') < 0 && ua.indexOf('IEMobile/'))
         return false;
       var version;
-      var match;
-      if ( (match = msiePattern.exec(ua)) || (match = tridentPattern.exec(ua)) || (match = iemobilePattern.exec(ua)))
+      var match = msiePattern.exec(ua);
+      if (!match)
+        if (tridentPattern.exec(ua))
+          match = tridentVersionPattern.exec(ua);
+      if (!match)
+        match = iemobilePattern.exec(ua);
+      if (match)
         version = match[1];
       else
         version = dataset.VALUE_UNKNOWN;
