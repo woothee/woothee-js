@@ -1,0 +1,26 @@
+{
+  "name": "whoothee",
+  "version": "1.0.1",
+  "homepage": "https://github.com/woothee/woothee-js",
+  "authors": [
+    "null"
+  ],
+  "description": "Woothee javascript(and node.js) implementation",
+  "main": "release/whoothee.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "whoothee"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
