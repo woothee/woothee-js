@@ -18,7 +18,8 @@ var TESTSET_DIR = __dirname + '/../woothee/testsets/',
       ['appliance.yaml','Appliance'],
       ['pc_lowpriority.yaml','PC/LowPriority'],
       ['misc.yaml','Misc'],
-      ['crawler_nonmajor.yaml','Crawler/NonMajor']
+      ['crawler_nonmajor.yaml','Crawler/NonMajor'],
+      ['blank.yaml','Blank']
     ];
 
 describe('woothee', function(){
