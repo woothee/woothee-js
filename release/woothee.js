@@ -2,7 +2,7 @@
   var root = this;
   // embed: dataset, util, browser, mobilephone, crawler, appliance, misc, woothee
 
-  // GENERATED from dataset.yaml at Wed Jan 14 18:17:51 JST 2015 by tagomoris
+  // GENERATED from dataset.yaml at Thu Mar 26 11:58:49 JST 2015 by tagomoris
 
   // Snapshot from package.json
   var package_info = {"name":"woothee","version":"1.0.2","description":"User-Agent string parser (js implementation)","main":"./release/woothee","devDependencies":{"mocha":">= 1.7.0","chai":">= 1.3.0","js-yaml":">= 1.0.3","should":"~1.2.2"},"scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/woothee/woothee-js"},"author":"tagomoris","license":"Apache v2"};
@@ -41,7 +41,7 @@
     ];
     var ATTRIBUTE_LIST = exports.ATTRIBUTE_LIST = [ATTRIBUTE_NAME, ATTRIBUTE_CATEGORY, ATTRIBUTE_OS, ATTRIBUTE_VENDOR, ATTRIBUTE_VERSION, ATTRIBUTE_OS_VERSION];
     var DATASET = {};
-    // GENERATED from dataset.yaml at Wed Jan 14 18:17:50 JST 2015 by tagomoris
+    // GENERATED from dataset.yaml at Thu Mar 26 11:58:49 JST 2015 by tagomoris
     var obj;
     obj = {label:'MSIE', name:'Internet Explorer', type:'browser'};
     obj['vendor'] = 'Microsoft';
@@ -1111,7 +1111,7 @@
     };
     function execParse(userAgent) {
       var result = {};
-      if (userAgent.length < 1 || userAgent === '-')
+      if (! userAgent || userAgent === '-')
         return result;
       if (tryCrawler(userAgent, result))
         return result;
@@ -1228,6 +1228,8 @@
         result[dataset.ATTRIBUTE_CATEGORY] = dataset.VALUE_UNKNOWN;
       if (! result[dataset.ATTRIBUTE_OS])
         result[dataset.ATTRIBUTE_OS] = dataset.VALUE_UNKNOWN;
+      if (! result[dataset.ATTRIBUTE_OS_VERSION])
+        result[dataset.ATTRIBUTE_OS_VERSION] = dataset.VALUE_UNKNOWN;
       if (! result[dataset.ATTRIBUTE_VERSION])
         result[dataset.ATTRIBUTE_VERSION] = dataset.VALUE_UNKNOWN;
       if (! result[dataset.ATTRIBUTE_VENDOR])
