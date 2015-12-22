@@ -2,10 +2,10 @@
   var root = this;
   // embed: dataset, util, browser, mobilephone, crawler, appliance, misc, woothee
 
-  // GENERATED from dataset.yaml at Thu Aug 13 14:22:28 JST 2015 by tagomoris
+  // GENERATED from dataset.yaml at Tue Dec 22 13:57:12 JST 2015 by tagomoris
 
   // Snapshot from package.json
-  var package_info = {"name":"woothee","version":"1.2.0","description":"User-Agent string parser (js implementation)","main":"./release/woothee","devDependencies":{"mocha":">= 1.7.0","chai":">= 1.3.0","js-yaml":">= 1.0.3","should":"~1.2.2"},"scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/woothee/woothee-js"},"author":"tagomoris","license":"Apache v2"};
+  var package_info = {"name":"woothee","version":"1.3.0","description":"User-Agent string parser (js implementation)","main":"./release/woothee","devDependencies":{"mocha":">= 1.7.0","chai":">= 1.3.0","js-yaml":">= 1.0.3","should":"~1.2.2"},"scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/woothee/woothee-js"},"author":"tagomoris","license":"Apache v2"};
 
   var dataset = {};
   (function(){
@@ -41,7 +41,7 @@
     ];
     var ATTRIBUTE_LIST = exports.ATTRIBUTE_LIST = [ATTRIBUTE_NAME, ATTRIBUTE_CATEGORY, ATTRIBUTE_OS, ATTRIBUTE_VENDOR, ATTRIBUTE_VERSION, ATTRIBUTE_OS_VERSION];
     var DATASET = {};
-    // GENERATED from dataset.yaml at Thu Aug 13 14:22:27 JST 2015 by tagomoris
+    // GENERATED from dataset.yaml at Tue Dec 22 13:57:12 JST 2015 by tagomoris
     var obj;
     obj = {label:'MSIE', name:'Internet Explorer', type:'browser'};
     obj['vendor'] = 'Microsoft';
@@ -433,6 +433,7 @@
       return true;
     };
     var edgePattern = /Edge\/([.0-9]+)/;
+    var firefoxiOSPattern = /FxiOS\/([.0-9]+)/;
     var chromePattern = /(?:Chrome|CrMo|CriOS)\/([.0-9]+)/;
     var operaBlinkPattern = /OPR\/([.0-9]+)/;
     var safariPattern = /Version\/([.0-9]+)/;
@@ -444,6 +445,12 @@
       if ((match = edgePattern.exec(ua))) {
         version = match[1];
         updateMap(result, dataset.get('Edge'));
+        updateVersion(result, version);
+        return true;
+      }
+      if ((match = firefoxiOSPattern.exec(ua))) {
+        version = match[1];
+        updateMap(result, dataset.get('Firefox'));
         updateVersion(result, version);
         return true;
       }
