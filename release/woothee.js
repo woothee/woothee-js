@@ -2,7 +2,7 @@
   var root = this;
   // embed: dataset, util, browser, mobilephone, crawler, appliance, misc, woothee
 
-  // GENERATED from dataset.yaml at Tue Dec 22 13:57:12 JST 2015 by tagomoris
+  // GENERATED from dataset.yaml at Tue May 17 02:45:48 JST 2016 by yuya
 
   // Snapshot from package.json
   var package_info = {"name":"woothee","version":"1.3.0","description":"User-Agent string parser (js implementation)","main":"./release/woothee","devDependencies":{"mocha":">= 1.7.0","chai":">= 1.3.0","js-yaml":">= 1.0.3","should":"~1.2.2"},"scripts":{"test":"make test"},"repository":{"type":"git","url":"https://github.com/woothee/woothee-js"},"author":"tagomoris","license":"Apache v2"};
@@ -41,7 +41,7 @@
     ];
     var ATTRIBUTE_LIST = exports.ATTRIBUTE_LIST = [ATTRIBUTE_NAME, ATTRIBUTE_CATEGORY, ATTRIBUTE_OS, ATTRIBUTE_VENDOR, ATTRIBUTE_VERSION, ATTRIBUTE_OS_VERSION];
     var DATASET = {};
-    // GENERATED from dataset.yaml at Tue Dec 22 13:57:12 JST 2015 by tagomoris
+    // GENERATED from dataset.yaml at Tue May 17 02:45:48 JST 2016 by yuya
     var obj;
     obj = {label:'MSIE', name:'Internet Explorer', type:'browser'};
     obj['vendor'] = 'Microsoft';
@@ -60,6 +60,9 @@
     DATASET[obj.label] = obj;
     obj = {label:'Opera', name:'Opera', type:'browser'};
     obj['vendor'] = 'Opera';
+    DATASET[obj.label] = obj;
+    obj = {label:'Vivaldi', name:'Vivaldi', type:'browser'};
+    obj['vendor'] = 'Vivaldi Technologies';
     DATASET[obj.label] = obj;
     obj = {label:'Sleipnir', name:'Sleipnir', type:'browser'};
     obj['vendor'] = 'Fenrir Inc.';
@@ -540,6 +543,18 @@
       var win = dataset.get('Win');
       updateCategory(result, win[dataset.KEY_CATEGORY]);
       updateOs(result, win[dataset.KEY_NAME]);
+      return true;
+    };
+    var vivaldiPattern = /Vivaldi\/([.0-9]+)/;
+    var challengeVivaldi = exports.challengeVivaldi = function(ua, result) {
+      if (ua.indexOf('Vivaldi/') < 0)
+        return false;
+      var version = dataset.VALUE_UNKNOWN;
+      var match = vivaldiPattern.exec(ua);
+      if (match)
+        version = match[1];
+      updateMap(result, dataset.get('Vivaldi'));
+      updateVersion(result, version);
       return true;
     };
 
@@ -1200,6 +1215,8 @@
     }
     function tryBrowser(userAgent, result) {
       if (browser.challengeMSIE(userAgent, result))
+        return true;
+      if (browser.challengeVivaldi(userAgent, result))
         return true;
       if (browser.challengeSafariChrome(userAgent, result))
         return true;
