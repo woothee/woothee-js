@@ -47,7 +47,9 @@ var dumpToFile = function() {
     defs.push("DATASET[obj.label] = obj;");
   });
 
-  fs.writeFile(js_file, header_data + defs.join("\n") + footer_data);
+  fs.writeFile(js_file, header_data + defs.join("\n") + footer_data, function(err){ 
+     if (err) throw err;
+  });
 };
 
 var checkcallback = function(){

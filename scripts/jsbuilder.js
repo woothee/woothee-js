@@ -63,7 +63,9 @@ var dumpToFile = function() {
     defs.push(util.format(template, modname, modname, modname, code.join("\n") + "\n"));
   });
 
-  fs.writeFile(target_path, header_data + defs.join("\n") + footer_data);
+  fs.writeFile(target_path, header_data + defs.join("\n") + footer_data, function(err) { 
+     if (err) throw err;
+  });
 };
 
 var checkcallback = function(){
