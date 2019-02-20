@@ -1,4 +1,7 @@
 var expect = require('chai').expect;
+var mocha = require('mocha')
+var describe = mocha.describe
+var it = mocha.it
 
 var dataset = require('../lib/dataset');
 

@@ -1,6 +1,9 @@
 var fs = require('fs');
 var files = fs.readdirSync('lib');
 var expect = require('chai').expect;
+var mocha = require('mocha')
+var describe = mocha.describe
+var it = mocha.it
 
 describe('woothee', function(){
   it('should be required successfully', function(){
