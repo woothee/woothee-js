@@ -1,5 +1,6 @@
 var fs = require('fs')
   , util = require('util')
+  , serialize = require('serialize-to-js')
   , yaml = require('js-yaml');
 
 var dataset_entries = yaml.safeLoad(fs.readFileSync(__dirname + '/../woothee/dataset.yaml', 'utf8'))
@@ -26,26 +27,31 @@ fs.readFile(__dirname + '/dataset_footer.js', function(err, data){
 });
 
 var dumpToFile = function() {
-  var defs = [util.format("// GENERATED from dataset.yaml at %s by %s\nvar obj;", generated_timestamp, generated_username)];
+  var data = {};
 
   dataset_entries.forEach(function(dataset){
     var label = dataset.label
       , name = dataset.name
       , type = dataset.type;
-    defs.push("obj = {label:'" + label + "', name:'" + name + "', type:'" + type + "'};");
+    var entry = {label: label, name: name, type: type};
     if (type === 'browser') {
-      defs.push("obj['vendor'] = '" + dataset.vendor + "';");
-    } else if ( type === 'os') {
-      defs.push("obj['category'] = '" + dataset.category + "';");
-    } else if ( type === 'full') {
-      defs.push("obj['vendor'] = '" + (dataset.vendor ? dataset.vendor : '') + "';");
-      defs.push("obj['category'] = '" + dataset.category + "';");
+      entry['vendor'] = dataset.vendor;
+    } else if (type === 'os') {
+      entry['category'] = dataset.category;
+    } else if (type === 'full') {
+      entry['vendor'] = (dataset.vendor ? dataset.vendor : '');
+      entry['category'] = dataset.category;
       if (dataset.os) {
-        defs.push("obj['os'] = '" + dataset.os + "';");
+        entry['os'] = dataset.os;
       }
     }
-    defs.push("DATASET[obj.label] = obj;");
+    data[entry.label] = entry;
   });
+
+  var defs = [
+    util.format("// GENERATED from dataset.yaml at %s by %s", generated_timestamp, generated_username),
+    'var DATASET = ' + serialize(data) + ';'
+  ];
 
   fs.writeFile(js_file, header_data + defs.join("\n") + footer_data, function(err){ 
      if (err) throw err;
