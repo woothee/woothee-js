@@ -1,6 +1,6 @@
 var fs = require('fs')
   , util = require('util')
-  , serialize = require('serialize-to-js')
+  , serialize_to_js = require('serialize-to-js')
   , yaml = require('js-yaml');
 
 var dataset_entries = yaml.safeLoad(fs.readFileSync(__dirname + '/../woothee/dataset.yaml', 'utf8'))
@@ -50,7 +50,7 @@ var dumpToFile = function() {
 
   var defs = [
     util.format("// GENERATED from dataset.yaml at %s by %s", generated_timestamp, generated_username),
-    'var DATASET = ' + serialize(data) + ';'
+    'var DATASET = ' + serialize_to_js(data) + ';'
   ];
 
   fs.writeFile(js_file, header_data + defs.join("\n") + footer_data, function(err){ 
