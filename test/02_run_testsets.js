@@ -55,6 +55,11 @@ describe('woothee', function(){
           expect(result[attr]).to.equal(entry[attr]);
         });
       });
+
+      it('test(is_crawler): ' + entry.target, function(){
+        isMajorCrawler = entry.category == 'crawler' && entry.name != 'misc crawler';
+        expect(woothee.isCrawler(entry.target)).to.equal(isMajorCrawler);
+      });
     });
   });
 });
