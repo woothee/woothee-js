@@ -52,7 +52,7 @@ For unknown user-agent (or partially failed to parse), result objects may have v
 ### Finding crawlers (almost all, not all) in fast
 
 ```javascript
-woothee.is_crawler('Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)')
+woothee.isCrawler('Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)')
  // => false
 ```
 
