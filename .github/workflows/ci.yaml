@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  pull_request:
+    branches: '*'
+  push:
+    branches:
+      - master
+      - main
+      - 'release-*'
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        node: ['12.x', '14.x']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.0
+        with:
+          node-version: ${{ matrix.node }}
+      - run: git submodule update --init
+      - run: npm install
+      - run: npm test

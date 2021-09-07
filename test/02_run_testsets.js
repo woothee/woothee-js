@@ -29,7 +29,7 @@ describe('woothee', function(){
   TARGETS.forEach(function(pair){
     var filename = pair[0],
         groupname = pair[1];
-    var testset = yaml.safeLoad(fs.readFileSync(TESTSET_DIR + filename, 'utf8'));
+    var testset = yaml.load(fs.readFileSync(TESTSET_DIR + filename, 'utf8'));
 
     testset.forEach(function(entry){
 

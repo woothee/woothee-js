@@ -3,7 +3,7 @@ var fs = require('fs')
   , serialize_to_js = require('serialize-to-js')
   , yaml = require('js-yaml');
 
-var dataset_entries = yaml.safeLoad(fs.readFileSync(__dirname + '/../woothee/dataset.yaml', 'utf8'))
+var dataset_entries = yaml.load(fs.readFileSync(__dirname + '/../woothee/dataset.yaml', 'utf8'))
   , js_file = __dirname + '/../lib/dataset.js';
 
 var generated_timestamp;
